@@ -13,7 +13,6 @@ public class Principal {
         String cep = interfaceTela.solicitaCep();
 
         AcessoAPI acessoAPI = new AcessoAPI();
-
         try {
             Endereco endereco = acessoAPI.buscaEndereco(cep);
             System.out.println(endereco.toString());

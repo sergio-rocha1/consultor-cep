@@ -24,5 +24,5 @@ public class InterfaceTela {
         return cep;
     }
 
-    public boolean verificaValidadeCep(String cep) {return Pattern.matches("[0-9]+", cep);}
+    private boolean verificaValidadeCep(String cep) {return Pattern.matches("[0-9]+", cep);}
 }

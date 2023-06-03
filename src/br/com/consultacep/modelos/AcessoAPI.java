@@ -10,11 +10,11 @@ import java.net.http.HttpResponse;
 
 public class AcessoAPI {
 
-    public URI geraEndereco(String cep) {
+    private URI geraEnderecoUrl(String cep) {
         return URI.create("https://viacep.com.br/ws/" + cep + "/json/");
     }
 
-    public HttpResponse<String> geraRequisicaoResposta(URI endereco) throws Exception {
+    private HttpResponse<String> geraRequisicaoResposta(URI endereco) throws Exception {
 
         try {
             // Cria um objeto HttpClient para enviar a requisição HTTP
@@ -34,7 +34,7 @@ public class AcessoAPI {
 
     public Endereco buscaEndereco(String cep) throws Exception {
 
-        URI uri = this.geraEndereco(cep);
+        URI uri = this.geraEnderecoUrl(cep);
         HttpResponse<String> response = this.geraRequisicaoResposta(uri);
 
         // Cria um objeto Gson para fazer a desserialização do JSON
