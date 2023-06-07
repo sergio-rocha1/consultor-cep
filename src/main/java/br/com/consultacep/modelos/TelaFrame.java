@@ -46,21 +46,31 @@ public class TelaFrame extends JFrame {
     private void pesquisarCEP() {
         String cep = campoCEP.getText();
 
-        AcessoAPI acessoAPI = new AcessoAPI();
-        try {
-            Endereco endereco = acessoAPI.buscaEndereco(cep);
+        if(ValidadorCEPHelper.validaCep(cep)) {
+            AcessoAPI acessoAPI = new AcessoAPI();
+            try {
+                if(ValidadorCEPHelper.validaCep(cep)) {
+                    Endereco endereco = acessoAPI.buscaEndereco(cep);
 
-            GeradorDeArquivo geradorDeArquivo = new GeradorDeArquivo();
-            geradorDeArquivo.geraJson(endereco);
+                    // Exibir o resultado na tela
+                    textAreaResultado.setText(endereco.logradouro() + "\n"
+                            + endereco.bairro() + "\n"
+                            + endereco.uf());
 
-            // Exibir o resultado na tela
-            textAreaResultado.setText(endereco.logradouro() + "\n"
-                    + endereco.bairro() + "\n"
-                    + endereco.uf());
+                    int resposta = JOptionPane.showConfirmDialog(this, "Deseja gerar o arquivo do CEP informado?");
+                    if(resposta == JOptionPane.YES_OPTION) {
+                        GeradorDeArquivo geradorDeArquivo = new GeradorDeArquivo();
+                        geradorDeArquivo.geraJson(endereco);
+                    }
+                }
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage() + "\n" + "Finalizando aplicação!");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(this, e.getMessage() + "\n" + "Finalizando aplicação!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "O CEP informado é invalido, favor inserir novamente!");
         }
+
     }
 }
