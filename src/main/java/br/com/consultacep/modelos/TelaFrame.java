@@ -2,6 +2,7 @@ package br.com.consultacep.modelos;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 
 public class TelaFrame extends JFrame {
@@ -57,11 +58,20 @@ public class TelaFrame extends JFrame {
                             + endereco.bairro() + "\n"
                             + endereco.uf());
 
-                    int resposta = JOptionPane.showConfirmDialog(this, "Deseja gerar o arquivo do CEP informado?");
-                    if(resposta == JOptionPane.YES_OPTION) {
-                        GeradorDeArquivo geradorDeArquivo = new GeradorDeArquivo();
-                        geradorDeArquivo.geraJson(endereco);
-                    }
+                    Timer timer = new Timer(2000, e -> {
+                        int resposta = JOptionPane.showConfirmDialog(TelaFrame.this, "Deseja gerar o arquivo do CEP informado?");
+                        if (resposta == JOptionPane.YES_OPTION) {
+                            GeradorDeArquivo geradorDeArquivo = new GeradorDeArquivo();
+                            try {
+                                geradorDeArquivo.geraJson(endereco);
+                                JOptionPane.showMessageDialog(TelaFrame.this, "O arquivo foi gerado com sucesso!");
+                            } catch (IOException ex) {
+                                JOptionPane.showMessageDialog(TelaFrame.this, "Não foi possivel gerar o arquivo devido: " + ex.getMessage());
+                            }
+                        }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
                 }
 
             } catch (Exception e) {
