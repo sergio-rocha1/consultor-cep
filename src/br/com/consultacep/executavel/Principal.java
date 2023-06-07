@@ -5,12 +5,13 @@ import br.com.consultacep.modelos.Endereco;
 import br.com.consultacep.modelos.GeradorDeArquivo;
 import br.com.consultacep.modelos.InterfaceTela;
 
-
 public class Principal {
+
     public static void main(String[] args) {
 
         InterfaceTela interfaceTela = new InterfaceTela();
         String cep = interfaceTela.solicitaCep();
+
         AcessoAPI acessoAPI = new AcessoAPI();
         try {
             Endereco endereco = acessoAPI.buscaEndereco(cep);
