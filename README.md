@@ -16,6 +16,7 @@ novas funcionalidade no projeto.
 - `Funcionalidade 4`: Retorno da busca na interface com Logradouro, Bairro e Estado.
 - `Funcionalidade 5`: Possibilidade de geração de arquivo .json com informações do CEP buscado via interface.
 
+![Demonstação do Projeto](img/funcionalidade_projeto.gif)
 # 🛠️ Abrir e rodar o projeto
 Após clonar o projeto, você pode abrir com a sua IDE de preferência.
 - Instalar o Java JDK 16 ([Tutorial de instalação](https://www.oracle.com/java/technologies/javase/jdk16-archive-downloads.html))
